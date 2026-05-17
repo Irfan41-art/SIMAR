@@ -9,7 +9,8 @@ export default function SchoolData() {
   const { settings } = useAppContext();
   const [formData, setFormData] = useState({
     schoolName: '',
-    principalName: ''
+    principalName: '',
+    logoURL: ''
   });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -18,7 +19,8 @@ export default function SchoolData() {
     if (settings) {
       setFormData({
         schoolName: settings.schoolName,
-        principalName: settings.principalName
+        principalName: settings.principalName,
+        logoURL: settings.logoURL || ''
       });
     }
   }, [settings]);
@@ -80,6 +82,28 @@ export default function SchoolData() {
                 className="w-full px-4 py-3 bg-slate-950/50 border border-white/5 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all text-white text-sm font-medium"
                 placeholder="Masukkan nama kepala sekolah"
               />
+            </div>
+
+            <div className="flex flex-col gap-4">
+              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 ml-1">URL Logo Sekolah (Opsional)</label>
+              
+              <div className="flex items-center gap-4">
+                <div className="w-16 h-16 rounded-xl bg-slate-950/50 border border-white/5 flex items-center justify-center overflow-hidden shrink-0">
+                  {formData.logoURL ? (
+                    <img src={formData.logoURL} alt="Logo Preview" className="w-full h-full object-cover" />
+                  ) : (
+                    <School size={24} className="text-slate-700" />
+                  )}
+                </div>
+                <input 
+                  type="text"
+                  value={formData.logoURL}
+                  onChange={(e) => setFormData({ ...formData, logoURL: e.target.value })}
+                  className="flex-1 px-4 py-3 bg-slate-950/50 border border-white/5 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all text-white text-sm font-medium"
+                  placeholder="https://..."
+                />
+              </div>
+              <p className="text-[9px] text-slate-600 mt-2 font-bold uppercase tracking-widest italic ml-1">Gunakan URL foto dari Profil Admin untuk sinkronisasi logo.</p>
             </div>
           </div>
 

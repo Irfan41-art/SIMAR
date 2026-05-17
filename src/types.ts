@@ -15,6 +15,7 @@ export interface UserProfile {
 export interface SchoolSettings {
   schoolName: string;
   principalName: string;
+  logoURL?: string;
 }
 
 export interface Student {

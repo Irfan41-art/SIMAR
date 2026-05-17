@@ -12,7 +12,7 @@ export default function AdminLayout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { profile } = useAppContext();
+  const { profile, settings } = useAppContext();
 
   const menuItems = [
     { label: 'Dashboard', path: '/admin', icon: <LayoutDashboard size={20} /> },
@@ -52,10 +52,16 @@ export default function AdminLayout() {
       `}>
         <div className="h-16 flex items-center px-6 border-b border-white/5">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/20">
-              <span className="text-white font-black text-xs">SM</span>
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/20 overflow-hidden bg-slate-800">
+              {settings?.logoURL ? (
+                <img src={settings.logoURL} alt="Logo" className="w-full h-full object-cover" />
+              ) : (
+                <div className="w-full h-full bg-blue-600 flex items-center justify-center">
+                  <span className="text-white font-black text-xs">SM</span>
+                </div>
+              )}
             </div>
-            <h1 className="text-lg font-display font-black text-white tracking-tight">SIMAR <span className="text-blue-400">Admin</span></h1>
+            <h1 className="text-lg font-display font-black text-white tracking-tight">SIMAR <span className="text-blue-400 text-xs ml-1 uppercase">Admin</span></h1>
           </div>
         </div>
 
@@ -113,7 +119,18 @@ export default function AdminLayout() {
           <button onClick={() => setIsSidebarOpen(true)} className="p-2 text-slate-400 hover:text-white transition-colors">
             <Menu size={20} />
           </button>
-          <h2 className="text-sm font-black uppercase tracking-widest">SIMAR Admin</h2>
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 rounded-md overflow-hidden bg-slate-800">
+              {settings?.logoURL ? (
+                <img src={settings.logoURL} alt="Logo" className="w-full h-full object-cover" />
+              ) : (
+                <div className="w-full h-full bg-blue-600 flex items-center justify-center">
+                  <span className="text-[8px] font-black">SM</span>
+                </div>
+              )}
+            </div>
+            <h2 className="text-sm font-black uppercase tracking-widest">SIMAR Admin</h2>
+          </div>
           <div className="w-8"></div>
         </header>
 

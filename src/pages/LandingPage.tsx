@@ -70,10 +70,16 @@ export default function LandingPage() {
       <header className="bg-[#020617]/80 backdrop-blur-xl border-b border-white/5 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/20">
-              <School className="w-5 h-5 text-white" />
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/20 overflow-hidden bg-slate-800">
+              {settings?.logoURL ? (
+                <img src={settings.logoURL} alt="Logo" className="w-full h-full object-cover" />
+              ) : (
+                <div className="w-full h-full bg-blue-600 flex items-center justify-center">
+                  <School className="w-5 h-5 text-white" />
+                </div>
+              )}
             </div>
-            <h1 className="text-xl font-display font-bold tracking-tight text-white">SIMAR</h1>
+            <h1 className="text-xl font-display font-bold tracking-tight text-white">SIMAR - SD NEGERI 4 PUSUNGI</h1>
           </div>
           <div className="flex items-center gap-4">
             <Link 
@@ -226,7 +232,13 @@ export default function LandingPage() {
       <footer className="border-t border-white/5 py-10">
         <div className="max-w-5xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
-            <School className="w-4 h-4 text-blue-500" />
+            <div className="w-6 h-6 rounded-md overflow-hidden bg-slate-800">
+              {settings?.logoURL ? (
+                <img src={settings.logoURL} alt="Logo" className="w-full h-full object-cover" />
+              ) : (
+                <School className="w-4 h-4 text-blue-500" />
+              ) }
+            </div>
             <span className="font-display font-bold text-white text-sm">SIMAR</span>
           </div>
           <p className="text-slate-500 text-[11px] font-bold uppercase tracking-widest">

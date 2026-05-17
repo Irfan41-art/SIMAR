@@ -7,11 +7,12 @@ import { User, Camera, Lock, Save, Loader2, CheckCircle } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export default function AdminProfile() {
-  const { profile } = useAppContext();
+  const { profile, settings } = useAppContext();
   const [formData, setFormData] = useState({
     name: '',
     photoURL: '',
-    newPassword: ''
+    newPassword: '',
+    syncToLogo: false
   });
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
@@ -21,10 +22,11 @@ export default function AdminProfile() {
       setFormData({
         name: profile.name,
         photoURL: profile.photoURL || '',
-        newPassword: ''
+        newPassword: '',
+        syncToLogo: settings?.logoURL === profile.photoURL
       });
     }
-  }, [profile]);
+  }, [profile, settings]);
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,7 +37,7 @@ export default function AdminProfile() {
       const user = auth.currentUser;
       if (!user) return;
 
-      // Update Firestore
+      // Update Firestore User
       await updateDoc(doc(db, 'users', user.uid), {
         name: formData.name,
         photoURL: formData.photoURL
@@ -46,6 +48,13 @@ export default function AdminProfile() {
         displayName: formData.name,
         photoURL: formData.photoURL
       });
+
+      // Sinkronisasi ke Logo Sekolah jika diceklis
+      if (formData.syncToLogo) {
+        await updateDoc(doc(db, 'settings', 'school'), {
+          logoURL: formData.photoURL
+        });
+      }
 
       // Update Password if provided
       if (formData.newPassword) {
@@ -120,6 +129,16 @@ export default function AdminProfile() {
                 placeholder="https://images.unsplash.com/photo-..."
                 className="w-full px-5 py-4 bg-slate-950/50 border border-white/5 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none text-white text-sm font-medium shadow-inner"
               />
+              <div className="mt-4 ml-1 flex items-center gap-3 bg-blue-500/5 p-3 rounded-xl border border-blue-500/10">
+                <input 
+                  type="checkbox" 
+                  id="syncLogo"
+                  checked={formData.syncToLogo}
+                  onChange={(e) => setFormData({...formData, syncToLogo: e.target.checked})}
+                  className="w-4 h-4 rounded border-white/10 bg-slate-900 text-blue-600 focus:ring-blue-500"
+                />
+                <label htmlFor="syncLogo" className="text-[9px] font-black text-blue-400 uppercase tracking-widest cursor-pointer">Gunakan foto ini sebagai Logo Utama Aplikasi (Header & Landing Page)</label>
+              </div>
             </div>
 
             <div className="pt-8 border-t border-white/5">
