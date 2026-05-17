@@ -79,18 +79,24 @@ export default function LandingPage() {
                 </div>
               )}
             </div>
-            <h1 className="text-xl font-display font-bold tracking-tight text-white">SIMAR - SD NEGERI 4 PUSUNGI</h1>
+            <h1 className="text-sm sm:text-xl font-display font-bold tracking-tight text-white flex flex-col sm:flex-row sm:items-center sm:gap-2 leading-tight">
+              <span>SIMAR</span>
+              <span className="hidden sm:inline text-slate-500 font-medium">|</span>
+              <span className="text-[10px] sm:text-sm font-medium text-slate-400 truncate max-w-[150px] sm:max-w-none">
+                SD NEGERI 4 PUSUNGI
+              </span>
+            </h1>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <Link 
               to="/login/admin" 
-              className="px-4 py-2 text-xs font-bold text-slate-400 hover:text-white uppercase tracking-widest transition-all"
+              className="px-2 sm:px-4 py-2 text-[10px] sm:text-xs font-bold text-slate-400 hover:text-white uppercase tracking-widest transition-all"
             >
               Admin
             </Link>
             <Link 
               to="/login/guru" 
-              className="px-5 py-2 bg-blue-600 text-white text-xs font-bold uppercase tracking-widest rounded-full hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/30 transition-all"
+              className="px-3 sm:px-5 py-1.5 sm:py-2 bg-blue-600 text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest rounded-full hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/30 transition-all text-center"
             >
               Portal Guru
             </Link>
