@@ -162,7 +162,7 @@ export default function GuruLayout() {
           <div className="w-8"></div>
         </header>
 
-        <main className="p-6 lg:p-10 flex-grow">
+        <main className="p-4 sm:p-6 lg:p-10 flex-grow">
           <div className="max-w-5xl mx-auto w-full">
             <Outlet />
           </div>

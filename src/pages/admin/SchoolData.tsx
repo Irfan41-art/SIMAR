@@ -41,16 +41,16 @@ export default function SchoolData() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto space-y-8">
+    <div className="max-w-2xl mx-auto space-y-6 sm:space-y-8">
       <div>
-        <h1 className="text-2xl font-display font-black text-white tracking-tight uppercase">Data Sekolah</h1>
-        <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] mt-1">Konfigurasi identitas institusi pendidikan</p>
+        <h1 className="text-xl sm:text-2xl font-display font-black text-white tracking-tight uppercase">Data Sekolah</h1>
+        <p className="text-slate-500 text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em] mt-1">Konfigurasi identitas institusi pendidikan</p>
       </div>
 
       <motion.div 
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-slate-900/40 backdrop-blur-xl p-10 rounded-[2.5rem] border border-white/5 shadow-2xl shadow-black/20"
+        className="bg-slate-900/40 backdrop-blur-xl p-6 sm:p-10 rounded-3xl sm:rounded-[2.5rem] border border-white/5 shadow-2xl shadow-black/20"
       >
         <form onSubmit={handleSave} className="space-y-8">
           <div className="flex justify-center mb-8">

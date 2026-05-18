@@ -117,20 +117,20 @@ export default function Journal() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-display font-black text-white tracking-tight uppercase">Jurnal Guru</h1>
-        <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] mt-1">Dokumentasi operasional kegiatan pembelajaran harian</p>
+        <h1 className="text-xl sm:text-2xl font-display font-black text-white tracking-tight uppercase">Jurnal Guru</h1>
+        <p className="text-slate-500 text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em] mt-1">Dokumentasi operasional kegiatan pembelajaran harian</p>
       </div>
 
-      <div className="flex gap-2 p-1.5 bg-slate-900/40 backdrop-blur-md rounded-2xl w-fit border border-white/5 shadow-2xl">
+      <div className="flex gap-2 p-1.5 bg-slate-900/40 backdrop-blur-md rounded-2xl w-full sm:w-fit border border-white/5 shadow-2xl overflow-x-auto">
         <button 
           onClick={() => setActiveTab('input')}
-          className={`px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === 'input' ? 'bg-violet-600 text-white shadow-xl shadow-violet-900/20' : 'text-slate-500 hover:text-slate-300'}`}
+          className={`flex-1 sm:flex-none px-4 sm:px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all text-nowrap ${activeTab === 'input' ? 'bg-violet-600 text-white shadow-xl shadow-violet-900/20' : 'text-slate-500 hover:text-slate-300'}`}
         >
           Isi Jurnal
         </button>
         <button 
           onClick={() => setActiveTab('list')}
-          className={`px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === 'list' ? 'bg-violet-600 text-white shadow-xl shadow-violet-900/20' : 'text-slate-500 hover:text-slate-300'}`}
+          className={`flex-1 sm:flex-none px-4 sm:px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all text-nowrap ${activeTab === 'list' ? 'bg-violet-600 text-white shadow-xl shadow-violet-900/20' : 'text-slate-500 hover:text-slate-300'}`}
         >
           Daftar Jurnal
         </button>
@@ -140,10 +140,10 @@ export default function Journal() {
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-slate-900/40 backdrop-blur-xl p-10 rounded-[2.5rem] border border-white/5 border-l-4 border-l-violet-600 shadow-2xl shadow-black/20"
+          className="bg-slate-900/40 backdrop-blur-xl p-6 sm:p-10 rounded-3xl sm:rounded-[2.5rem] border border-white/5 border-l-4 border-l-violet-600 shadow-2xl shadow-black/20"
         >
-          <form onSubmit={handleSave} className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="space-y-6">
+          <form onSubmit={handleSave} className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+            <div className="space-y-5 sm:space-y-6">
               <div>
                 <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 ml-1">Tanggal Sesi</label>
                 <input 
@@ -153,7 +153,7 @@ export default function Journal() {
                   className="w-full px-4 py-3 bg-slate-950/50 border border-white/5 rounded-xl focus:ring-2 focus:ring-violet-500 outline-none text-white text-sm font-medium"
                 />
               </div>
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-2 gap-4 sm:gap-6">
                 <div>
                   <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 ml-1">Kelas</label>
                   <select 
@@ -188,7 +188,7 @@ export default function Journal() {
                   {MAPEL_LIST.map(m => <option key={m} value={m}>{m}</option>)}
                 </select>
               </div>
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-2 gap-4 sm:gap-6">
                 <div>
                   <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 ml-1">Jumlah Hadir</label>
                   <input 
@@ -210,7 +210,7 @@ export default function Journal() {
               </div>
               <div>
                 <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 ml-1">Status Keterlaksaan</label>
-                <div className="flex gap-6 mt-1">
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-1">
                   {['terlaksana', 'tertunda'].map(s => (
                     <label key={s} className="flex items-center gap-3 cursor-pointer group">
                       <div className="relative flex items-center justify-center">
@@ -231,14 +231,14 @@ export default function Journal() {
               </div>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-5 sm:space-y-6">
               <div>
                 <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 ml-1">Ringkasan Materi & Kegiatan</label>
                 <textarea 
                   required rows={5}
                   value={formData.material}
                   onChange={(e) => setFormData({...formData, material: e.target.value})}
-                  className="w-full px-5 py-4 bg-slate-950/50 border border-white/5 rounded-[1.5rem] focus:ring-2 focus:ring-violet-500 outline-none resize-none text-white text-sm font-medium"
+                  className="w-full px-5 py-4 bg-slate-950/50 border border-white/5 rounded-2xl sm:rounded-[1.5rem] focus:ring-2 focus:ring-violet-500 outline-none resize-none text-white text-sm font-medium"
                   placeholder="Tuliskan materi yang diajarkan..."
                 ></textarea>
               </div>
@@ -248,7 +248,7 @@ export default function Journal() {
                   required rows={4}
                   value={formData.reflection}
                   onChange={(e) => setFormData({...formData, reflection: e.target.value})}
-                  className="w-full px-5 py-4 bg-slate-950/50 border border-white/5 rounded-[1.5rem] focus:ring-2 focus:ring-violet-500 outline-none resize-none text-white text-sm font-medium"
+                  className="w-full px-5 py-4 bg-slate-950/50 border border-white/5 rounded-2xl sm:rounded-[1.5rem] focus:ring-2 focus:ring-violet-500 outline-none resize-none text-white text-sm font-medium"
                   placeholder="Refleksi singkat kegiatan..."
                 ></textarea>
               </div>
@@ -276,18 +276,18 @@ export default function Journal() {
               <motion.div 
                 key={j.id}
                 whileHover={{ y: -2 }}
-                className="bg-slate-900/40 backdrop-blur-xl p-8 rounded-[2rem] border border-white/5 flex items-center justify-between gap-6 shadow-xl shadow-black/20"
+                className="bg-slate-900/40 backdrop-blur-xl p-5 sm:p-8 rounded-2xl sm:rounded-[2rem] border border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-6 shadow-xl shadow-black/20"
               >
-                <div className="flex items-center gap-6">
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center border ${j.status === 'terlaksana' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-amber-500/10 text-amber-400 border-amber-500/20'}`}>
-                    <FileText size={24} />
+                <div className="flex items-center gap-4 sm:gap-6">
+                  <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center border shrink-0 ${j.status === 'terlaksana' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-amber-500/10 text-amber-400 border-amber-500/20'}`}>
+                    <FileText size={22} className="sm:size-6" />
                   </div>
                   <div>
-                    <h4 className="font-display font-black text-slate-200 uppercase tracking-tight">{j.subject} - {j.class}</h4>
-                    <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1">Pertemuan {j.session} • {format(new Date(j.date), 'dd MMMM yyyy')}</p>
+                    <h4 className="font-display font-black text-slate-200 text-sm sm:text-base uppercase tracking-tight">{j.subject} - {j.class}</h4>
+                    <p className="text-[9px] sm:text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1">Pertemuan {j.session} • {format(new Date(j.date), 'dd MMM yyyy')}</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-4">
+                <div className="flex items-center justify-between sm:justify-end gap-4 border-t sm:border-t-0 border-white/5 pt-4 sm:pt-0">
                   <span className={`px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest border ${j.status === 'terlaksana' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-amber-500/10 text-amber-400 border-amber-500/20'}`}>
                     {j.status}
                   </span>

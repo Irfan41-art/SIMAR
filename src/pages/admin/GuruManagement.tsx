@@ -131,24 +131,24 @@ export default function GuruManagement() {
   );
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div className="space-y-6 sm:space-y-8">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
         <div>
-          <h1 className="text-2xl font-display font-black text-white tracking-tight uppercase">Manajemen Guru</h1>
-          <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] mt-1">Kelola akun dan kredensial tenaga pendidik</p>
+          <h1 className="text-xl sm:text-2xl font-display font-black text-white tracking-tight uppercase">Manajemen Guru</h1>
+          <p className="text-slate-500 text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em] mt-1">Kelola akun dan kredensial tenaga pendidik</p>
         </div>
         <button 
           onClick={() => handleOpenModal()}
-          className="bg-blue-600 text-white px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest flex items-center gap-2 hover:bg-blue-500 hover:shadow-xl hover:shadow-blue-500/20 transition-all active:scale-95 shadow-lg shadow-black/20"
+          className="bg-blue-600 text-white px-5 sm:px-6 py-3 rounded-xl text-[10px] sm:text-xs font-black uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-blue-500 hover:shadow-xl hover:shadow-blue-500/20 transition-all active:scale-95 shadow-lg shadow-black/20 w-full sm:w-auto"
         >
           <UserPlus size={18} />
           Tambah Tenaga Pendidik
         </button>
       </div>
 
-      <div className="bg-slate-900/40 backdrop-blur-xl rounded-[2rem] border border-white/5 shadow-2xl shadow-black/20 overflow-hidden">
-        <div className="p-6 border-b border-white/5 flex flex-col md:flex-row gap-4">
-          <div className="relative flex-1">
+      <div className="bg-slate-900/40 backdrop-blur-xl rounded-3xl sm:rounded-[2rem] border border-white/5 shadow-2xl shadow-black/20 overflow-hidden">
+        <div className="p-4 sm:p-6 border-b border-white/5">
+          <div className="relative">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={18} />
             <input 
               type="text"
@@ -160,7 +160,8 @@ export default function GuruManagement() {
           </div>
         </div>
 
-        <div className="overflow-x-auto">
+        {/* Desktop View Table */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-left">
             <thead>
               <tr className="bg-white/5">
@@ -224,6 +225,60 @@ export default function GuruManagement() {
             </tbody>
           </table>
         </div>
+
+        {/* Mobile View Cards */}
+        <div className="md:hidden divide-y divide-white/5">
+          {loading ? (
+            <div className="px-6 py-16 text-center text-slate-500">
+              <Loader2 className="animate-spin inline mr-3 w-5 h-5" /> 
+              <span className="text-[10px] font-black uppercase tracking-widest">Memproses...</span>
+            </div>
+          ) : filteredGurus.length === 0 ? (
+            <div className="px-6 py-16 text-center text-slate-500">
+              <div className="text-[10px] font-black uppercase tracking-widest">Data guru tidak ditemukan</div>
+            </div>
+          ) : (
+            filteredGurus.map((guru) => (
+              <div key={guru.id} className="p-5 flex flex-col gap-4">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <div className="font-bold text-slate-200">{guru.name}</div>
+                    <div className="text-[9px] font-black text-slate-600 uppercase tracking-widest mt-0.5">{guru.nip}</div>
+                  </div>
+                  <div className="flex gap-1">
+                    <button 
+                      onClick={() => handleOpenModal(guru)}
+                      className="p-2 text-blue-400 bg-blue-400/5 rounded-lg"
+                    >
+                      <Edit2 size={14} />
+                    </button>
+                    <button 
+                      onClick={() => handleDelete(guru.id, guru.name)}
+                      disabled={isDeleting === guru.id}
+                      className="p-2 text-red-500 bg-red-500/5 rounded-lg disabled:opacity-50"
+                    >
+                      {isDeleting === guru.id ? <Loader2 size={14} className="animate-spin" /> : <Trash2 size={14} />}
+                    </button>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="bg-white/5 p-3 rounded-xl border border-white/5">
+                    <p className="text-[8px] font-black text-slate-500 uppercase tracking-widest mb-1">Mata Pelajaran</p>
+                    <p className="text-[10px] font-bold text-slate-300">{guru.subject || '-'}</p>
+                  </div>
+                  <div className="bg-white/5 p-3 rounded-xl border border-white/5">
+                    <p className="text-[8px] font-black text-slate-500 uppercase tracking-widest mb-1">Kelas Diampu</p>
+                    <p className="text-[10px] font-bold text-purple-400 uppercase">{guru.classAssigned || '-'}</p>
+                  </div>
+                  <div className="bg-white/5 p-3 rounded-xl border border-white/5 col-span-2">
+                    <p className="text-[8px] font-black text-slate-500 uppercase tracking-widest mb-1">Username Akses</p>
+                    <p className="text-[10px] font-bold text-blue-400 lowercase">{guru.username}</p>
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
       </div>
 
       {/* Modal */}
@@ -234,23 +289,23 @@ export default function GuruManagement() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-slate-900 border border-white/10 w-full max-w-lg rounded-[2.5rem] shadow-2xl overflow-hidden"
+              className="bg-slate-900 border border-white/10 w-full max-w-lg rounded-3xl sm:rounded-[2.5rem] shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto font-sans"
             >
-              <div className="px-8 py-6 border-b border-white/5 flex justify-between items-center bg-linear-to-r from-blue-600 to-indigo-600 text-white">
+              <div className="px-6 sm:px-8 py-5 sm:py-6 border-b border-white/5 flex justify-between items-center bg-linear-to-r from-blue-600 to-indigo-600 text-white">
                 <div>
-                  <h3 className="text-xl font-display font-black tracking-tight uppercase">
+                  <h3 className="text-lg sm:text-xl font-display font-black tracking-tight uppercase">
                     {currentGuru ? 'Ubah Data' : 'Guru Baru'}
                   </h3>
-                  <p className="text-blue-100/60 text-[10px] font-bold uppercase tracking-widest mt-1">Formulir Pendaftaran Tenaga Pendidik</p>
+                  <p className="text-blue-100/60 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest mt-0.5 sm:mt-1">Formulir Pendaftaran Tenaga Pendidik</p>
                 </div>
                 <button onClick={() => setIsModalOpen(false)} className="p-2 hover:bg-white/10 rounded-full transition-colors">
                   <X size={20} />
                 </button>
               </div>
               
-              <form onSubmit={handleSubmit} className="p-8 space-y-6">
-                <div className="grid grid-cols-2 gap-5">
-                  <div className="col-span-2">
+              <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-5 sm:space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div className="sm:col-span-2">
                     <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 ml-1">Nama Lengkap</label>
                     <input 
                       type="text" required
@@ -277,7 +332,7 @@ export default function GuruManagement() {
                       className="w-full px-4 py-3 bg-slate-950/50 border border-white/5 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-white text-sm font-medium"
                     />
                   </div>
-                  <div className="col-span-2">
+                  <div className="sm:col-span-2">
                     <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 ml-1">Kelas Diampu</label>
                     <input 
                       type="text"
@@ -286,7 +341,7 @@ export default function GuruManagement() {
                       className="w-full px-4 py-3 bg-slate-950/50 border border-white/5 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-white text-sm font-medium"
                     />
                   </div>
-                  <div className="col-span-2 border-t border-white/5 pt-6 mt-2">
+                  <div className="sm:col-span-2 border-t border-white/5 pt-6 mt-2">
                     <label className="block text-[10px] font-black text-blue-400 uppercase tracking-widest mb-2 ml-1">Username Akses</label>
                     <input 
                       type="text" required
@@ -296,7 +351,7 @@ export default function GuruManagement() {
                       className="w-full px-4 py-3 bg-slate-950/40 border border-white/5 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none disabled:opacity-30 text-white text-sm font-medium tracking-wide"
                     />
                   </div>
-                  <div className="col-span-2">
+                  <div className="sm:col-span-2">
                     <label className="block text-[10px] font-black text-blue-400 uppercase tracking-widest mb-2 ml-1">Password Keamanan</label>
                     <input 
                       type="text" required
@@ -307,7 +362,7 @@ export default function GuruManagement() {
                   </div>
                 </div>
 
-                <div className="pt-6">
+                <div className="pt-4 sm:pt-6">
                   <button 
                     type="submit"
                     disabled={loading}

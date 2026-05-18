@@ -159,23 +159,23 @@ export default function Attendance() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-display font-black text-white tracking-tight uppercase">Sistem Absensi</h1>
-          <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] mt-1">Pencatatan presensi digital dan pelaporan harian</p>
+          <h1 className="text-xl sm:text-2xl font-display font-black text-white tracking-tight uppercase">Sistem Absensi</h1>
+          <p className="text-slate-500 text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em] mt-1">Pencatatan presensi digital dan pelaporan harian</p>
         </div>
       </div>
 
-      <div className="flex gap-2 p-1.5 bg-slate-900/40 backdrop-blur-md rounded-2xl w-fit border border-white/5 shadow-2xl">
+      <div className="flex gap-2 p-1.5 bg-slate-900/40 backdrop-blur-md rounded-2xl w-full sm:w-fit border border-white/5 shadow-2xl overflow-x-auto">
         <button 
           onClick={() => setActiveTab('input')}
-          className={`px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === 'input' ? 'bg-emerald-600 text-white shadow-xl shadow-emerald-900/20' : 'text-slate-500 hover:text-slate-300'}`}
+          className={`flex-1 sm:flex-none px-4 sm:px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all text-nowrap ${activeTab === 'input' ? 'bg-emerald-600 text-white shadow-xl shadow-emerald-900/20' : 'text-slate-500 hover:text-slate-300'}`}
         >
           Input Presensi
         </button>
         <button 
           onClick={() => setActiveTab('report')}
-          className={`px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === 'report' ? 'bg-emerald-600 text-white shadow-xl shadow-emerald-900/20' : 'text-slate-500 hover:text-slate-300'}`}
+          className={`flex-1 sm:flex-none px-4 sm:px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all text-nowrap ${activeTab === 'report' ? 'bg-emerald-600 text-white shadow-xl shadow-emerald-900/20' : 'text-slate-500 hover:text-slate-300'}`}
         >
           Rekapitulasi PDF
         </button>
@@ -183,12 +183,12 @@ export default function Attendance() {
 
       {activeTab === 'input' ? (
         <div className="grid grid-cols-1 gap-6">
-          <div className="bg-slate-900/40 backdrop-blur-xl p-8 rounded-[2rem] border border-white/5 border-l-4 border-l-emerald-600 shadow-2xl shadow-black/20">
-            <h3 className="text-sm font-black text-white mb-8 flex items-center gap-3 uppercase tracking-widest">
+          <div className="bg-slate-900/40 backdrop-blur-xl p-6 sm:p-8 rounded-3xl sm:rounded-[2rem] border border-white/5 border-l-4 border-l-emerald-600 shadow-2xl shadow-black/20">
+            <h3 className="text-sm font-black text-white mb-6 sm:mb-8 flex items-center gap-3 uppercase tracking-widest">
               <ClipboardCheck className="text-emerald-500" size={20} />
               Konfigurasi Sesi Belajar
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
               <div>
                 <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 ml-1">Mata Pelajaran</label>
                 <select 
@@ -234,7 +234,7 @@ export default function Attendance() {
             <div className="mt-8">
               <button 
                 onClick={handleShowSheet}
-                className="bg-emerald-600 text-white px-8 py-4 rounded-xl text-xs font-black uppercase tracking-widest flex items-center gap-2 hover:bg-emerald-500 hover:shadow-xl hover:shadow-emerald-500/20 transition-all active:scale-95 shadow-lg shadow-black/20"
+                className="bg-emerald-600 text-white px-6 sm:px-8 py-4 rounded-xl text-[10px] sm:text-xs font-black uppercase tracking-widest flex items-center justify-center sm:justify-start gap-2 hover:bg-emerald-500 hover:shadow-xl hover:shadow-emerald-500/20 transition-all active:scale-95 shadow-lg shadow-black/20 w-full sm:w-auto"
               >
                 Tampilkan Lembar Daftar Hadir
                 <ChevronRight size={18} />
@@ -247,21 +247,23 @@ export default function Attendance() {
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-slate-900/40 backdrop-blur-xl rounded-[2.5rem] border border-white/5 shadow-2xl shadow-black/40 overflow-hidden"
+                className="bg-slate-900/40 backdrop-blur-xl rounded-3xl sm:rounded-[2.5rem] border border-white/5 shadow-2xl shadow-black/40 overflow-hidden"
               >
-                <div className="p-8 bg-white/5 flex items-center justify-between border-b border-white/5">
-                  <div>
+                <div className="p-5 sm:p-8 bg-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-white/5">
+                  <div className="text-center sm:text-left">
                     <h4 className="font-display font-black text-white uppercase tracking-tight">Presensi Murid</h4>
                     <p className="text-slate-500 text-[9px] font-bold uppercase tracking-widest mt-0.5">Berikan status kehadiran pada setiap siswa</p>
                   </div>
                   <button 
                     onClick={handleHadirSemua}
-                    className="px-5 py-2.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-emerald-500/20 transition-all"
+                    className="w-full sm:w-auto px-5 py-2.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-emerald-500/20 transition-all"
                   >
                     Set Hadir Semua
                   </button>
                 </div>
-                <div className="overflow-x-auto">
+
+                {/* Desktop View Table */}
+                <div className="hidden md:block overflow-x-auto">
                   <table className="w-full">
                     <thead>
                       <tr className="text-left bg-white/5">
@@ -274,12 +276,12 @@ export default function Attendance() {
                         <tr key={s.id} className="hover:bg-white/5 transition-colors group">
                           <td className="px-8 py-5 font-bold text-slate-200 group-hover:text-white transition-colors">{s.name}</td>
                           <td className="px-8 py-5">
-                            <div className="flex items-center justify-center gap-3">
+                            <div className="flex items-center justify-center gap-2 sm:gap-3">
                               {['Hadir', 'Izin', 'Sakit', 'Alpa'].map(status => (
                                 <button
                                   key={status}
                                   onClick={() => setRecords({...records, [s.id]: status})}
-                                  className={`px-4 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all border ${
+                                  className={`px-3 sm:px-4 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all border ${
                                     records[s.id] === status 
                                       ? 'bg-emerald-600 text-white border-emerald-600 shadow-lg shadow-emerald-900/40' 
                                       : 'bg-slate-950/40 text-slate-500 border-white/5 hover:border-emerald-500/30'
@@ -295,14 +297,39 @@ export default function Attendance() {
                     </tbody>
                   </table>
                 </div>
-                <div className="p-8 bg-white/5 border-t border-white/5 flex justify-end">
+
+                {/* Mobile View Cards */}
+                <div className="md:hidden divide-y divide-white/5">
+                  {students.map(s => (
+                    <div key={s.id} className="p-5 space-y-4">
+                      <div className="font-bold text-slate-200">{s.name}</div>
+                      <div className="grid grid-cols-2 gap-2">
+                        {['Hadir', 'Izin', 'Sakit', 'Alpa'].map(status => (
+                          <button
+                            key={status}
+                            onClick={() => setRecords({...records, [s.id]: status})}
+                            className={`px-3 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all border ${
+                              records[s.id] === status 
+                                ? 'bg-emerald-600 text-white border-emerald-600' 
+                                : 'bg-slate-950/40 text-slate-500 border-white/5'
+                            }`}
+                          >
+                            {status}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="p-6 sm:p-8 bg-white/5 border-t border-white/5">
                   <button 
                     onClick={handleSave}
                     disabled={saving}
-                    className="bg-emerald-600 text-white px-12 py-4 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center gap-3 hover:bg-emerald-500 hover:shadow-xl hover:shadow-emerald-500/20 active:scale-95 transition-all shadow-lg shadow-black/40 disabled:opacity-50"
+                    className="w-full sm:w-auto sm:ml-auto bg-emerald-600 text-white px-8 sm:px-12 py-4 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-emerald-500 hover:shadow-xl hover:shadow-emerald-500/20 active:scale-95 transition-all shadow-lg shadow-black/40 disabled:opacity-50"
                   >
                     {saving ? <Loader2 className="animate-spin" /> : <Save size={18} />}
-                    Finalisasi & Simpan Presensi
+                    Finalisasi & Simpan
                   </button>
                 </div>
               </motion.div>
@@ -310,15 +337,15 @@ export default function Attendance() {
           </AnimatePresence>
         </div>
       ) : (
-        <div className="bg-slate-900/40 backdrop-blur-xl p-12 rounded-[3rem] border border-white/5 shadow-2xl shadow-black/40 max-w-lg mx-auto border-t-4 border-t-emerald-600">
-          <div className="text-center mb-10">
-            <div className="w-16 h-16 bg-emerald-600/10 rounded-2xl flex items-center justify-center text-emerald-400 mx-auto mb-6 border border-emerald-400/10 shadow-[0_0_20px_rgba(16,185,129,0.1)]">
-              <Printer size={32} />
+        <div className="bg-slate-900/40 backdrop-blur-xl p-6 sm:p-12 rounded-3xl sm:rounded-[3rem] border border-white/5 shadow-2xl shadow-black/40 max-w-lg mx-auto border-t-4 border-t-emerald-600">
+          <div className="text-center mb-6 sm:mb-10">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 bg-emerald-600/10 rounded-2xl flex items-center justify-center text-emerald-400 mx-auto mb-4 sm:mb-6 border border-emerald-400/10 shadow-[0_0_20px_rgba(16,185,129,0.1)]">
+              <Printer size={28} className="sm:size-8" />
             </div>
-            <h3 className="text-xl font-display font-black text-white uppercase tracking-tight">Eksport Laporan</h3>
-            <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] mt-2">Dapatkan dokumen legalitas kehadiran siswa</p>
+            <h3 className="text-lg sm:text-xl font-display font-black text-white uppercase tracking-tight">Eksport Laporan</h3>
+            <p className="text-slate-500 text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em] mt-2">Dapatkan dokumen legalitas kehadiran siswa</p>
           </div>
-          <div className="grid grid-cols-2 gap-6 mb-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-10">
             <div>
               <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 ml-1">Periode Bulan</label>
               <select 

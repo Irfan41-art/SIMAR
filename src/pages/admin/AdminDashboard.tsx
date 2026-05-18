@@ -49,21 +49,21 @@ export default function AdminDashboard() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-display font-black text-white tracking-tight">Dashboard Admin</h1>
-        <p className="text-slate-500 font-bold uppercase text-[10px] tracking-[0.2em]">Ringkasan seluruh data sistem SIMAR v2.0</p>
+        <h1 className="text-2xl sm:text-3xl font-display font-black text-white tracking-tight">Dashboard Admin</h1>
+        <p className="text-slate-500 font-bold uppercase text-[9px] sm:text-[10px] tracking-[0.2em]">Ringkasan seluruh data sistem SIMAR v2.0</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <StatItem icon={<Users size={24}/>} label="Total Murid" value={stats.students} trend="+12% bulan ini" color="blue" />
-        <StatItem icon={<UserPlus size={24}/>} label="Total Guru" value={stats.gurus} trend="+2 bulan ini" color="emerald" />
-        <StatItem icon={<TrendingUp size={24}/>} label="Kehadiran" value={`${stats.attendance}%`} trend="Stabil" color="amber" />
-        <StatItem icon={<ClipboardList size={24}/>} label="Total Jurnal" value={stats.journals} trend="+15 minggu ini" color="violet" />
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <StatItem icon={<Users size={20} className="sm:size-6"/>} label="Total Murid" value={stats.students} trend="+12% bulan ini" color="blue" />
+        <StatItem icon={<UserPlus size={20} className="sm:size-6"/>} label="Total Guru" value={stats.gurus} trend="+2 bulan ini" color="emerald" />
+        <StatItem icon={<TrendingUp size={20} className="sm:size-6"/>} label="Kehadiran" value={`${stats.attendance}%`} trend="Stabil" color="amber" />
+        <StatItem icon={<ClipboardList size={20} className="sm:size-6"/>} label="Total Jurnal" value={stats.journals} trend="+15 minggu ini" color="violet" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="bg-slate-900/40 backdrop-blur-md p-6 rounded-[2rem] border border-white/5 shadow-2xl shadow-black/10">
-          <h3 className="text-sm font-black text-white uppercase tracking-widest mb-8 px-2">Distribusi Data</h3>
-          <div className="h-80 w-full">
+        <div className="bg-slate-900/40 backdrop-blur-md p-5 sm:p-6 rounded-3xl sm:rounded-[2rem] border border-white/5 shadow-2xl shadow-black/10">
+          <h3 className="text-sm font-black text-white uppercase tracking-widest mb-6 sm:mb-8 px-2">Distribusi Data</h3>
+          <div className="h-64 sm:h-80 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={data}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(255,255,255,0.05)" />
@@ -83,8 +83,8 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        <div className="bg-slate-900/40 backdrop-blur-md p-6 rounded-[2rem] border border-white/5 shadow-2xl shadow-black/10">
-          <h3 className="text-sm font-black text-white uppercase tracking-widest mb-8 px-2">Status Sistem</h3>
+        <div className="bg-slate-900/40 backdrop-blur-md p-5 sm:p-6 rounded-3xl sm:rounded-[2rem] border border-white/5 shadow-2xl shadow-black/10">
+          <h3 className="text-sm font-black text-white uppercase tracking-widest mb-6 sm:mb-8 px-2">Status Sistem</h3>
           <div className="space-y-8 px-2">
             <SystemStatus label="Server Uptime" value="99.9%" progress={99.9} color="emerald" />
             <SystemStatus label="Database Usage" value="12%" progress={12} color="blue" />
@@ -111,13 +111,13 @@ function StatItem({ icon, label, value, trend, color }: any) {
     violet: 'bg-violet-600 shadow-violet-500/20',
   };
   return (
-    <motion.div whileHover={{ y: -5 }} className="bg-slate-900/40 backdrop-blur-md p-8 rounded-[2.5rem] border border-white/5 shadow-2xl shadow-black/10 transition-all">
-      <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 shadow-lg text-white ${colors[color]}`}>
+    <motion.div whileHover={{ y: -5 }} className="bg-slate-900/40 backdrop-blur-md p-5 sm:p-8 rounded-3xl sm:rounded-[2.5rem] border border-white/5 shadow-2xl shadow-black/10 transition-all">
+      <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-4 sm:mb-6 shadow-lg text-white ${colors[color]}`}>
         {icon}
       </div>
-      <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">{label}</p>
-      <h4 className="text-3xl font-display font-black text-white">{value}</h4>
-      <p className="text-[9px] text-slate-500 font-bold uppercase mt-3 py-1 px-2 bg-white/5 rounded-full inline-block">{trend}</p>
+      <p className="text-[9px] sm:text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">{label}</p>
+      <h4 className="text-2xl sm:text-3xl font-display font-black text-white">{value}</h4>
+      <p className="text-[8px] sm:text-[9px] text-slate-500 font-bold uppercase mt-2 sm:mt-3 py-1 px-2 bg-white/5 rounded-full inline-block">{trend}</p>
     </motion.div>
   );
 }
